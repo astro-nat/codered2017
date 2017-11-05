@@ -1,40 +1,42 @@
-#include <SoftwareSerial.h>
-
-// Bluetooth Module TX->10
-//                  RX->11
-SoftwareSerial btComm(10, 11); // syntax: (RX, TX)
-
 // Flex Sensors
-const int f_index  = 0; // A0 = Index
-const int f_middle = 1; // A1 = Middle
-const int f_ring   = 2; // A2 = Ring
-const int f_pinky  = 3; // A3 = Pinky
-const int f_thumb  = 4; // A4 = Thumb
+const int f_index  = 1; // A1 = Index
+const int f_middle = 2; // A2 = Middle
+const int f_ring   = 3; // A3 = Ring
+const int f_pinky  = 4; // A4 = Pinky
+const int f_thumb  = 0; // A0 = Thumb
 
 const int dpps = 50; // data-points per second
 
 void setup() {
-  // Begin PC Serial Communication
-  Serial.begin(9600);
-
-  // Begin Bluetooth Serial Commmunication
-  btComm.begin(9600);
+  // Begin Serial Communication
+  Serial.begin(57600);
 }
 
 void loop() {
 
-  // Read the position of the flex sensors (~512 to ~1024):
-  int index = analogRead(f_index);
-  int middle = analogRead(f_middle);
-  int ring = analogRead(f_ring);
-  int pinky = analogRead(f_pinky);
-  int thumb = analogRead(f_thumb);
+  // data buffer
+  int buff[5][dpps];
   
-  // form telemetry string
-  String tlm = String(index) + "," + String(middle) + "," + String(ring) + "," + String(pinky) + "," + String(thumb);
+  int i;
+  for (i = 0; i < dpps; i = i + 1) {
+    buff[0][i] = analogRead(f_thumb);
+    buff[1][i] = analogRead(f_index);
+    buff[2][i] = analogRead(f_middle);
+    buff[3][i] = analogRead(f_ring);
+    buff[4][i] = analogRead(f_pinky);
+    delay(1000/dpps);
+  }
 
-  btComm.println(tlm); // send to bluetooth
-  Serial.println(tlm); // send to serial
-
-  delay(1000/dpps);
+  // dump data onto serial
+  int b;
+  String tlm;
+  for (b = 0; b < 5; b = b + 1) {
+    tlm = String(b) + ":" + String(buff[b][0]);
+    int x;
+    for (x = 1; x < dpps; x = x + 1) {
+     tlm += "," + String(buff[b][x]);
+    }
+    tlm += "asdf";
+    Serial.println(tlm);
+  }
 }
