@@ -112,4 +112,6 @@ except (KeyboardInterrupt, SystemExit):
 	exitapp = True
 	raise
 
+
 print "Exiting Main Thread"
+

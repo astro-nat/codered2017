@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+<<<<<<< HEAD
 from flask_socketio import SocketIO, emit
 
 
@@ -99,3 +100,17 @@ if __name__ == "__main__":
 			
 
   
+=======
+app = Flask(__name__)
+
+@app.route("/")
+def main():
+    return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run()
+
+@app.route('/static/')
+def tutorial():
+    return render_template('tutorial.html')
+>>>>>>> 727c9349e9e8633b754c6889c6540ba173f612cc
