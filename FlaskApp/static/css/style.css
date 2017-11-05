@@ -102,8 +102,7 @@ body {
   #wrapper {
     padding-left: 0;
   }
-  /* 
-#wrapper.toggled {
+  #wrapper.toggled {
     padding-left: 250px;
   }
   #sidebar-wrapper {
@@ -120,7 +119,7 @@ body {
     position: relative;
     margin-right: 0;
   }
- */
+
 }
 
 /* 
