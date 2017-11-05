@@ -1,6 +1,6 @@
 # Smart Sign
 
-## CodeRed 2017 Projects
+## CodeRed 2017 Project
 
 ### Hackstronauts
 
