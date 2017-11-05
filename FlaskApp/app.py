@@ -8,6 +8,6 @@ def main():
 if __name__ == "__main__":
     app.run()
 
-@app.route('/showSignUp')
-def showSignUp():
+@app.route('/static/')
+def tutorial():
     return render_template('tutorial.html')
