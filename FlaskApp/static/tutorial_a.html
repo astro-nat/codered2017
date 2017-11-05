@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<<<<<<< HEAD
 <!-- 
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
 	html,
@@ -50,18 +49,21 @@
  
 <script>
 $(document).ready(function(){
+
+	console.log("Starting...");
+	
     var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
     socket.on('my response', function(msg) {
         console.log(msg);
         
         // if msg equals data, change background
-        document.body.style.background = green;
+        document.body.style.backgroundColor = "green";
     });
+    
+    document.body.style.backgroundColor = "green";
     
 });
 </script>
-=======
-<img source="/static/img/letter-a.jpg"> </img>
->>>>>>> 727c9349e9e8633b754c6889c6540ba173f612cc
+
 
 </html>
